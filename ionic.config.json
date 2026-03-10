@@ -1,7 +1,8 @@
 {
   "name": "prueba-tecnica-seti",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
