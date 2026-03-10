@@ -1,0 +1,7 @@
+{
+  "name": "prueba-tecnica-seti",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
