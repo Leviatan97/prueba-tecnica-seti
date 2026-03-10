@@ -35,3 +35,74 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Custom Global Styles - Prueba Tecnica SETI */
+
+ion-header {
+  padding-top: 10px;
+  background: transparent;
+
+  ion-toolbar {
+    --background: transparent;
+    --padding-start: 24px;
+    --padding-end: 24px;
+
+    ion-title {
+      font-size: 28px;
+      font-weight: 800;
+      text-align: left;
+      padding-inline: 0;
+      color: #1a1a1a;
+    }
+  }
+
+  .search-toolbar {
+    --min-height: 44px;
+    margin-top: 5px;
+    padding-bottom: 8px;
+  }
+
+  .custom-search {
+    --background: #f4f7ff;
+    --border-radius: 12px;
+    --placeholder-color: #919eab;
+    --icon-color: #3880ff;
+    margin-bottom: 8px;
+  }
+}
+
+ion-content {
+  --background: #f8f9fa;
+}
+
+ion-list {
+  background: transparent !important;
+  padding: 0 16px 120px 16px;
+}
+
+.fab-new {
+  bottom: 100px;
+  right: 24px;
+
+  ion-fab-button {
+    --background: #3880ff;
+    --border-radius: 18px;
+    --box-shadow: 0 12px 24px rgba(56, 128, 255, 0.3);
+    width: 65px;
+    height: 65px;
+
+    ion-icon {
+      font-size: 30px;
+    }
+  }
+}
+
+.custom-card {
+  --background: white;
+  --border-radius: 16px;
+  --padding-start: 16px;
+  --padding-end: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+

@@ -1,0 +1,152 @@
+:host {
+  ion-content {
+    --background: #fdfdfd;
+  }
+
+  .step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 40px;
+    gap: 10px;
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      transition: all 0.3s ease;
+
+      &.active {
+        background: #3880ff;
+        transform: scale(1.2);
+        box-shadow: 0 0 10px rgba(56, 128, 255, 0.4);
+      }
+    }
+
+    .line {
+      width: 40px;
+      height: 2px;
+      background: #e0e0e0;
+
+      &.active {
+        background: #3880ff;
+      }
+    }
+  }
+
+  .main-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 30px;
+    padding-left: 10px;
+  }
+
+  .input-card {
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin: 0 0 40px;
+    background: white;
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 10px 0;
+    }
+  }
+
+  .custom-item {
+    --padding-start: 10px;
+    --background: transparent;
+    
+    .custom-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #3880ff;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .custom-input, .custom-select {
+      font-size: 18px;
+      color: #666;
+      --placeholder-color: #999;
+      --placeholder-opacity: 0.8;
+    }
+  }
+
+  .next-button {
+    --border-radius: 12px;
+    --background: #84a9f7;
+    --background-activated: #3880ff;
+    height: 56px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(132, 169, 247, 0.3);
+
+    ion-icon {
+      margin-left: 8px;
+    }
+  }
+
+  .confirm-card {
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin: 0 0 40px;
+    background: white;
+
+    .big-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    .summary-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000;
+      margin: 10px 0;
+    }
+
+    .summary-subtitle {
+      color: #666;
+      font-size: 16px;
+    }
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .main-button {
+      --border-radius: 12px;
+      height: 56px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .edit-btn {
+      --color: #999;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  .animate-in {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

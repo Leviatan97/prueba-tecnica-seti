@@ -1,0 +1,91 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/todos" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ step() === 1 ? UI.TITLES.NEW_TODO : UI.TITLES.CONFIRM }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="step-indicator">
+    <div class="dot" [class.active]="step() >= 1"></div>
+    <div class="line" [class.active]="step() >= 2"></div>
+    <div class="dot" [class.active]="step() >= 2"></div>
+  </div>
+
+  @if (step() === 1) {
+    <div class="animate-in">
+      <h1 class="main-title">{{ UI.PROMPTS.WHAT_TO_DO }}</h1>
+      
+      <ion-card class="input-card">
+        <ion-card-content>
+          <div class="form-container">
+            <ion-item lines="none" class="custom-item">
+              <ion-label position="stacked" class="custom-label">{{ UI.LABELS.NAME | uppercase }}</ion-label>
+              <ion-input
+                type="text"
+                [placeholder]="UI.PLACEHOLDERS.TODO_TITLE"
+                [ngModel]="todoTitle()"
+                (ngModelChange)="todoTitle.set($event)"
+                required
+                class="custom-input"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item lines="none" class="custom-item">
+              <ion-label position="stacked" class="custom-label">{{ UI.LABELS.CATEGORY | uppercase }}</ion-label>
+              <ion-select
+                [ngModel]="categoryId()"
+                (ngModelChange)="categoryId.set($event)"
+                [placeholder]="UI.LABELS.ALL_CATEGORIES"
+                interface="alert"
+                class="custom-select"
+              >
+                @for (cat of categories(); track cat.id) {
+                  <ion-select-option [value]="cat.id">
+                    {{ cat.name }}
+                  </ion-select-option>
+                }
+              </ion-select>
+            </ion-item>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-button 
+        expand="block" 
+        class="next-button" 
+        (click)="nextStep()" 
+        [disabled]="!todoTitle().trim() || !categoryId()"
+      >
+        {{ UI.LABELS.CONTINUE }}
+        <ion-icon name="arrow-forward" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+  }
+
+  @if (step() === 2) {
+    <div class="animate-in">
+      <h1 class="main-title">{{ UI.LABELS.SUMMARY_TASK }}</h1>
+      
+      <ion-card class="confirm-card">
+        <ion-card-content class="ion-text-center">
+          <ion-icon name="checkmark-circle-outline" color="success" class="big-icon"></ion-icon>
+          <h3 class="summary-title">{{ todoTitle() }}</h3>
+          <p class="summary-subtitle">{{ UI.LABELS.CAT_SELECTED }}</p>
+        </ion-card-content>
+      </ion-card>
+
+      <div class="button-group">
+        <ion-button fill="clear" color="medium" (click)="prevStep()" class="edit-btn">
+          {{ UI.LABELS.EDIT }}
+        </ion-button>
+        <ion-button expand="block" color="primary" class="main-button" (click)="createTodo()">
+          {{ UI.LABELS.SAVE }}
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  }
+</ion-content>

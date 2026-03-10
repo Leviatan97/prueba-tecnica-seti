@@ -1,0 +1,47 @@
+/* Estilos para el componente de pestañas */
+:host {
+  display: block;
+  height: 100%;
+}
+
+ion-tabs {
+  background: var(--ion-background-color);
+  height: 100%;
+}
+
+ion-tab-bar {
+  --border: 0;
+  --background: transparent;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  height: 65px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  background: rgba(var(--ion-background-color-rgb, 255, 255, 255), 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.05);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+}
+
+ion-tab-button {
+  --color: var(--ion-color-medium);
+  --color-selected: var(--ion-color-primary);
+  --background: transparent;
+  transition: all 0.3s ease;
+  border-radius: 15px;
+}
+
+/* Ajuste crítico para el outlet interno de las tabs */
+ion-router-outlet {
+  height: 100%;
+}
+
+/* Permitir que el contenido dentro del outlet reciba clicks si el FAB está fuera del área del bar */
+.tabs-inner {
+  overflow: visible !important;
+}

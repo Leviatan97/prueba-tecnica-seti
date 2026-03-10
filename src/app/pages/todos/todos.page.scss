@@ -1,0 +1,122 @@
+:host {
+  .filters-container {
+    display: flex;
+    gap: 12px;
+    padding: 8px 24px 16px 24px;
+    background: #f8f9fa;
+
+    .filter-item {
+      flex: 1;
+      background: #eaeff4; // Gris muy claro como en la imagen
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 70px;
+      
+      ion-select {
+        width: 100%;
+        --padding-start: 0;
+        --padding-end: 0;
+        --padding-top: 0;
+        --padding-bottom: 0;
+        font-size: 16px;
+        font-weight: 700;
+        color: #1a1a1a;
+
+        &::part(label) {
+          color: #6179ff; // Color azul/morado del label
+          font-size: 10px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+          margin-bottom: 4px;
+        }
+
+        &::part(text) {
+          padding-top: 2px;
+        }
+
+        &::part(icon) {
+          color: #1a1a1a;
+          opacity: 1;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  ion-list {
+    padding: 0 0 120px 0;
+    .todo-card {
+      --background: white;
+      --border-radius: 16px;
+      --padding-start: 16px;
+      --padding-end: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      --padding-end: 8px;
+      padding-inline: 10px;
+      
+      .todo-actions-end {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .complete-task-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+
+          .complete-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: #637381;
+          }
+
+          ion-checkbox {
+            --size: 20px;
+            --border-radius: 6px;
+            margin: 0;
+          }
+        }
+
+        .delete-btn {
+          margin: 0;
+          --padding-start: 4px;
+          --padding-end: 4px;
+          --color: #ff4961;
+          font-size: 18px;
+        }
+      }
+
+      ion-label {
+        h2 {
+          font-weight: 600;
+          font-size: 16px;
+          color: #1a1a1a;
+        }
+        
+        &.completed h2 {
+          text-decoration: line-through;
+          color: #919eab;
+        }
+
+        .category-badge {
+          --padding-start: 8px;
+          --padding-end: 8px;
+          --padding-top: 4px;
+          --padding-bottom: 4px;
+          font-size: 10px;
+          font-weight: 700;
+          border-radius: 6px;
+          margin-top: 6px;
+          background: #f4f7ff;
+          color: #3880ff;
+        }
+      }
+    }
+  }
+}

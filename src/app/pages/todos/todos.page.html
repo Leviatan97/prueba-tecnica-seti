@@ -1,0 +1,100 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>{{ UI.TITLES.TODOS }}</ion-title>
+  </ion-toolbar>
+  
+  <ion-toolbar class="search-toolbar">
+    <ion-searchbar 
+      [placeholder]="UI.PLACEHOLDERS.SEARCH_TASKS" 
+      (ionInput)="onSearch($event)"
+      animated="true"
+      class="custom-search"
+    ></ion-searchbar>
+  </ion-toolbar>
+
+  <div class="filters-container">
+    <div class="filter-item">
+      <ion-select 
+        [label]="UI.LABELS.CATEGORY"
+        labelPlacement="stacked"
+        [placeholder]="UI.PLACEHOLDERS.CATEGORY_FILTER"
+        [value]="unselectedConstant"
+        (ionChange)="onCategoryFilter($event)"
+        interface="alert"
+        toggleIcon="chevron-down-outline"
+        expandedIcon="chevron-up-outline"
+        class="custom-select"
+      >
+        <ion-select-option [value]="unselectedConstant">{{ UI.LABELS.ALL }}</ion-select-option>
+        @for (category of categories(); track category.id) {
+          <ion-select-option [value]="category.id">
+            {{ category.name }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </div>
+
+    <div class="filter-item">
+      <ion-select 
+        [label]="UI.LABELS.STATUS_FILTER"
+        labelPlacement="stacked"
+        [placeholder]="UI.PLACEHOLDERS.STATUS_FILTER"
+        [(ngModel)]="filterStatus"
+        (ionChange)="onStatusFilterChange()"
+        interface="alert"
+        toggleIcon="chevron-down-outline"
+        expandedIcon="chevron-up-outline"
+        class="custom-select"
+      >
+        <ion-select-option value="all">{{ UI.LABELS.STATUS_ALL }}</ion-select-option>
+        <ion-select-option value="completed">{{ UI.LABELS.STATUS_COMPLETED }}</ion-select-option>
+        <ion-select-option value="pending">{{ UI.LABELS.STATUS_PENDING }}</ion-select-option>
+      </ion-select>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (filteredTodos(); as todos) {
+    @if (todos.length > 0) {
+      <ion-list lines="none">
+        @for (todo of filteredTodos(); track todo.id) {
+          <ion-item-sliding>
+            <ion-item class="todo-card ion-no-border">
+              <ion-label [class.completed]="todo.isCompleted">
+                <h2 class="todo-title">{{ todo.title }}</h2>
+                <div class="todo-metadata">
+                  <ion-badge color="light" class="category-badge">
+                    {{ todo.categoryName }}
+                  </ion-badge>
+                </div>
+              </ion-label>
+
+              <div slot="end" class="todo-actions-end">
+                <div class="complete-task-wrapper" (click)="toggleTodo(todo)">
+                  <span class="complete-label">{{ todo.isCompleted ? 'Completada' : 'Completar' }}</span>
+                  <ion-checkbox 
+                    [checked]="todo.isCompleted"
+                    class="custom-checkbox"
+                  ></ion-checkbox>
+                </div>
+              </div>
+            </ion-item>
+          </ion-item-sliding>
+        }
+      </ion-list>
+    } @else {
+      <app-empty-state 
+        [message]="UI.EMPTY_STATES.NO_TODOS.TITLE"
+        [description]="UI.EMPTY_STATES.NO_TODOS.DESCRIPTION"
+        icon="document-text-outline"
+      ></app-empty-state>
+    }
+  }
+  
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="fab-new">
+    <ion-fab-button routerLink="/tabs/new-todo">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
