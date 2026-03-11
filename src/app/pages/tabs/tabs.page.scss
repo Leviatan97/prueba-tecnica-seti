@@ -12,20 +12,21 @@ ion-tabs {
 ion-tab-bar {
   --border: 0;
   --background: transparent;
-  position: fixed;
+  position: absolute;
   bottom: 20px;
   left: 20px;
   right: 20px;
   height: 65px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  background: rgba(var(--ion-background-color-rgb, 255, 255, 255), 0.95);
+  background: white;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.05);
-  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex !important;
   justify-content: space-around;
   align-items: center;
   z-index: 1000;
+  width: auto;
 }
 
 ion-tab-button {

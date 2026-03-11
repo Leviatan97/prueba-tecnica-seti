@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
@@ -14,6 +14,7 @@ import { UI_TEXTS } from '../../core/constants/storage.constants';
 import { EmptyStateComponent } from '../../shared/components/molecules/empty-state/empty-state.component';
 import { addIcons } from 'ionicons';
 import { add, pencilOutline, trashOutline, documentTextOutline } from 'ionicons/icons';
+import { RemoteConfigService } from 'src/app/core/services/remote-config.service';
 
 @Component({
   selector: 'app-categories',
@@ -29,9 +30,14 @@ import { add, pencilOutline, trashOutline, documentTextOutline } from 'ionicons/
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoriesPage implements ViewWillEnter {
+export class CategoriesPage implements OnInit {
   readonly UI = UI_TEXTS;
   private searchTerm = signal<string>('');
+
+  isCreationEnabled = signal<boolean>(true);
+  isEditEnabled = signal<boolean>(true);
+  isDeleteEnabled = signal<boolean>(true);
+  private remoteConfig = inject(RemoteConfigService);
 
   filteredCategories = computed(() => {
     const categories = this.todoService.categories();
@@ -46,7 +52,11 @@ export class CategoriesPage implements ViewWillEnter {
     addIcons({ add, pencilOutline, trashOutline, documentTextOutline });
   }
 
-  ionViewWillEnter(): void {}
+  async ngOnInit() {
+    this.isCreationEnabled.set(await this.remoteConfig.getBoolean('flagCreacion'));
+    this.isEditEnabled.set(await this.remoteConfig.getBoolean('flagEdicion'));
+    this.isDeleteEnabled.set(await this.remoteConfig.getBoolean('flagEliminacion'));
+  }
 
   onSearch(event: CustomEvent): void {
     const value = (event.detail as any).value || '';

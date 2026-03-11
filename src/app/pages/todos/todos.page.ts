@@ -1,13 +1,14 @@
-import { Component, ChangeDetectionStrategy, signal, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActionSheetController, IonBadge, IonCheckbox, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonItem, IonItemSliding, IonLabel, IonList, IonSearchbar, IonSelect, IonSelectOption, IonTitle, IonToolbar, ViewWillEnter } from '@ionic/angular/standalone';
+import { ActionSheetController, IonBadge, IonCheckbox, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonSearchbar, IonSelect, IonSelectOption, IonTitle, IonToolbar, ViewWillEnter } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { TodoService } from '../../core/services/todo.service';
+import { RemoteConfigService } from '../../core/services/remote-config.service';
 import { Todo } from '../../core/models/todo.model';
 import { CATEGORY_CONSTANTS, UI_TEXTS } from '../../core/constants/storage.constants';
 import { EmptyStateComponent } from '../../shared/components/molecules/empty-state/empty-state.component';
-import { add, chevronDownOutline, chevronUpOutline, documentTextOutline, filter, list } from 'ionicons/icons';
+import { add, chevronDownOutline, chevronUpOutline, documentTextOutline, filter, list, trashOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
 @Component({
@@ -20,14 +21,18 @@ import { addIcons } from 'ionicons';
     IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, 
     IonLabel, IonCheckbox, IonFab, IonFabButton, IonIcon, 
     IonSearchbar, IonSelect, IonSelectOption, IonItemSliding,
+    IonItemOptions, IonItemOption,
     IonBadge,
     EmptyStateComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodosPage implements ViewWillEnter {
+export class TodosPage implements ViewWillEnter, OnInit {
   readonly UI = UI_TEXTS;
   readonly unselectedConstant = CATEGORY_CONSTANTS.UNSELECTED;
+
+  isCreationEnabled = signal<boolean>(true);
+  private remoteConfig = inject(RemoteConfigService);
 
   filterStatus: 'all' | 'completed' | 'pending' = 'all';
 
@@ -55,7 +60,11 @@ export class TodosPage implements ViewWillEnter {
   constructor(
     private todoService: TodoService
   ) {
-    addIcons({ add, filter, list, chevronDownOutline, chevronUpOutline, documentTextOutline });
+    addIcons({ add, filter, list, chevronDownOutline, chevronUpOutline, documentTextOutline, trashOutline });
+  }
+
+  async ngOnInit() {
+    this.isCreationEnabled.set(await this.remoteConfig.getBoolean('flagCreacion'));
   }
 
   ionViewWillEnter(): void {
@@ -80,5 +89,9 @@ export class TodosPage implements ViewWillEnter {
       ...todo,
       isCompleted: !todo.isCompleted
     });
+  }
+
+  deleteTodo(id: string): void {
+    this.todoService.deleteTodo(id);
   }
 }
