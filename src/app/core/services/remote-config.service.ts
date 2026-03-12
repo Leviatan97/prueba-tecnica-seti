@@ -6,11 +6,7 @@ import { RemoteConfig, fetchAndActivate, getBoolean } from '@angular/fire/remote
 })
 export class RemoteConfigService {
   constructor(private remoteConfig: RemoteConfig) {}
-
-  /**
-   * Obtiene el valor de un Feature Flag desde Remote Config.
-   * @param key Nombre del parámetro en Firebase (ej: 'flagCreacion')
-   */
+  
   async isFeatureEnabled(key: string): Promise<boolean> {
     try {
       await fetchAndActivate(this.remoteConfig);
