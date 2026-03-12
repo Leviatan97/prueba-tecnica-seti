@@ -2,16 +2,16 @@
 
 Esta es una aplicación de gestión de tareas (To-Do List) desarrollada con **Ionic** y **Angular**, diseñada para demostrar el uso de tecnologías modernas como **Angular Signals**, **Control Flow** y **Arquitectura Molecular**.
 
-## 🚀 Tecnologías Principales
+## Tecnologías Principales
 
-- **Framework**: Ionic 7+ & Angular 17+ (Signals & standalone bits)
+- **Framework**: Ionic 7+ & Angular 20 (Signals & standalone bits)
 - **Persistencia**: `@ionic/storage-angular`
 - **Diseño**: SCSS, Material Design global, Arquitectura Molecular (Atomic Design)
 - **Híbrido**: Integración con **Cordova** para Android e iOS.
 
 ---
 
-## 📱 Compilación y Ejecución (Híbrido)
+## Compilación y Ejecución (Híbrido)
 
 La aplicación está preparada para ser compilada para plataformas móviles utilizando **Cordova**.
 
@@ -56,7 +56,7 @@ ionic cordova build ios
 
 ---
 
-## 🛠️ Arquitectura del Proyecto
+## Arquitectura del Proyecto
 
 El proyecto sigue una estructura basada en **Arquitectura Molecular**:
 
@@ -75,7 +75,7 @@ El proyecto sigue una estructura basada en **Arquitectura Molecular**:
 
 ---
 
-## 🧪 Desarrollo Local
+## Desarrollo Local
 
 Para previsualizar en el navegador:
 
