@@ -12,8 +12,8 @@ ion-tabs {
 ion-tab-bar {
   --border: 0;
   --background: transparent;
-  position: absolute;
-  bottom: 20px;
+  position: fixed;
+  bottom: 12px;
   left: 20px;
   right: 20px;
   height: 65px;
@@ -27,6 +27,7 @@ ion-tab-bar {
   align-items: center;
   z-index: 1000;
   width: auto;
+  padding-bottom: 0%;
 }
 
 ion-tab-button {
