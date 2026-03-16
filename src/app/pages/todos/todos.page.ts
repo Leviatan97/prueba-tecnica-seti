@@ -54,7 +54,7 @@ export class TodosPage implements ViewWillEnter, OnInit {
       const matchC = catId === CATEGORY_CONSTANTS.UNSELECTED || t.categoryId === catId;
       const matchS = status === "all" || (status === "completed" && t.isCompleted) || (status === "pending" && !t.isCompleted);
       return matchT && matchC && matchS;
-    }).map(t => ({ ...t, categoryName: cats.find(c => c.id === t.categoryId)?.name || "Sin categor�a" }));
+    }).map(t => ({ ...t, categoryName: cats.find(c => c.id === t.categoryId)?.name || "Sin categoría" }));
   });
 
   constructor(
